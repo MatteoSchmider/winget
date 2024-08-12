@@ -8,11 +8,20 @@ on:
 jobs:
   Build-Push-Image:
     runs-on: windows-latest
-    container:
-      image: mcr.microsoft.com/windows/servercore:ltsc2022
-
     steps: 
       - name: Check out repository code
         uses: actions/checkout@v4
 
-      - run: dir
+      - run: docker image ls
+      - run: docker pull mcr.microsoft.com/windows/servercore:ltsc2022
+      - run: docker image ls
+
+      - name: Build docker image
+        run: docker build -t matteoschmider/winget:latest -f winget.Dockerfile .
+
+      - name: Login to docker hub
+        run: docker login --username ${{ secrets.DOCKER_USERNAME }} --password ${{ secrets.DOCKER_PASSWORD }} hub.docker.com
+
+      - name: Push image to docker hub
+        run: docker push matteoschmider/winget:latest
+
