@@ -1,8 +1,10 @@
 name: Release
 run-name: build and push docker image as latest to hub.docker.com/r/matteoschmider/winget as latest
 on:
-  release:
-    types: [created, edited]
+  push
+#  release:
+#    types: [created, edited]
+
 jobs:
   Build-Push-Image:
     runs-on: windows-latest
