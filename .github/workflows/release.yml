@@ -11,6 +11,10 @@ jobs:
     steps: 
       - name: Check out repository code
         uses: actions/checkout@v4
+      
+      - run: docker image ls
+      - run: docker system prune -a
+      - run: docker image ls
 
       - name: Build docker image
         run: docker build -t matteoschmider/winget:latest -f winget.Dockerfile .
