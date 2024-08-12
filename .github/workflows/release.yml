@@ -12,6 +12,7 @@ jobs:
       - name: Check out repository code
         uses: actions/checkout@v4
 
+      - run: docker image ls
       - run: docker pull mcr.microsoft.com/windows:ltsc2019
 
       - name: Build docker image
