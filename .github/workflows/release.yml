@@ -11,13 +11,9 @@ jobs:
     steps: 
       - name: Check out repository code
         uses: actions/checkout@v4
-      
-      - run: docker image ls
-      - run: docker system prune --all --force
-      - run: docker image ls
 
       - name: Build docker image
-        run: docker build -t matteoschmider/winget:latest -f winget.Dockerfile .
+        run: dir && docker build -t matteoschmider/winget:latest -f winget.Dockerfile .
 
       - name: Login to docker hub
         run: docker login --username ${{ secrets.DOCKER_USERNAME }} --password ${{ secrets.DOCKER_PASSWORD }} hub.docker.com
