@@ -9,7 +9,7 @@ jobs:
   Build-Push-Image:
     runs-on: windows-latest
     container:
-      image: mcr.microsoft.com/windows:ltsc2022
+      image: mcr.microsoft.com/windows/servercore:ltsc2022
 
     steps: 
       - name: Check out repository code
