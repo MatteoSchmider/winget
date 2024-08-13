@@ -1,9 +1,8 @@
 name: Release
 run-name: build and push docker image as latest to hub.docker.com/r/matteoschmider/winget as latest
 on:
-  push
-#  release:
-#    types: [created, edited]
+  release:
+    types: [created, edited]
 
 jobs:
   Build-Push-Image:
