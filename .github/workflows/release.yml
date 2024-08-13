@@ -16,7 +16,7 @@ jobs:
         with:
           registry: docker.io
           image: matteoschmider/winget
-          tags: latest
+          tags: latest, ${{ github.ref_name }}
           dockerfile: winget.Dockerfile
           username: ${{ secrets.DOCKERHUB_USERNAME }}
           password: ${{ secrets.DOCKERHUB_TOKEN }}
