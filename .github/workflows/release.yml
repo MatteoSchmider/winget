@@ -3,19 +3,20 @@ run-name: build and push docker image as latest to hub.docker.com/r/matteoschmid
 on:
   release:
     types: [created, edited]
+
 jobs:
   Build-Push-Image:
-    runs-on: windows-latest
-    steps: 
-      - name: Check out repository code
+    runs-on: windows-2022
+    steps:
+      - name: Check out the repo
         uses: actions/checkout@v4
-
-      - name: Build docker image
-        run: docker build -t matteoschmider/winget:latest -f winget.Dockerfile .
-
-      - name: Login to docker hub
-        run: docker login --username ${{ secrets.DOCKER_USERNAME }} --password ${{ secrets.DOCKER_PASSWORD }} hub.docker.com
-
-      - name: Push image to docker hub
-        run: docker push matteoschmider/winget:latest
-
+      
+      - name: Build & push Docker image
+        uses: mr-smithers-excellent/docker-build-push@v6
+        with:
+          registry: docker.io
+          image: matteoschmider/winget
+          tags: latest
+          dockerfile: winget.Dockerfile
+          username: ${{ secrets.DOCKERHUB_USERNAME }}
+          password: ${{ secrets.DOCKERHUB_TOKEN }}
